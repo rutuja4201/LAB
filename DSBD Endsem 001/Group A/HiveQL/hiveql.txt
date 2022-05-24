@@ -1,0 +1,35 @@
+#Creating, Dropping, and altering Database tables.
+show databases;
+
+create database test_db;
+
+use test_db;
+
+use default;
+
+ALTER DATABASE test_db SET DBPROPERTIES ('Date' = '2017-10-12');
+
+drop database test_db;
+
+
+
+
+
+# Creating an external Hive table.
+https://phoenixnap.com/kb/hive-create-external-table
+
+
+
+
+
+#Load table with data, insert new values and field in the table, Join tables with Hive
+https://www.geeksforgeeks.org/hive-load-data-into-table/
+
+
+
+
+
+
+
+#Find the average departure delay per day in 2008.
+https://github.com/markgrover/cloudcon-hive

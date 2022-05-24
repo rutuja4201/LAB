@@ -1,0 +1,231 @@
+ml19@ml19-HP-280-Pro-G6-Microtower-PC:~$ sudo cp /home/ml19/Desktop/hadoopsoftware/apache-hive-2.2.0-bin.tar.gz /usr/local/
+[sudo] password for ml19: 
+
+ml19@ml19-HP-280-Pro-G6-Microtower-PC:~$ su - hduser
+Password: 
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:~$ cd /usr/local/
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ ls
+apache-hive-2.2.0-bin.tar.gz  games       hbase    lib   share
+bin                           hadoop      hive     man   src
+etc                           hadoop_tmp  include  sbin
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ sudo gedit ~/.bashrc
+[sudo] password for hduser: 
+
+** (gedit:13402): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ export HIVE_HOME=/usr/local/hive
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ source ~/.bashrc
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ start-dfs.sh
+22/05/19 21:14:04 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Starting namenodes on [localhost]
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+hduser@localhost's password: 
+localhost: namenode running as process 4563. Stop it first.
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+hduser@localhost's password: 
+localhost: datanode running as process 4748. Stop it first.
+Starting secondary namenodes [0.0.0.0]
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+hduser@0.0.0.0's password: 
+0.0.0.0: secondarynamenode running as process 4989. Stop it first.
+22/05/19 21:15:02 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ start-yarn.sh
+starting yarn daemons
+resourcemanager running as process 5211. Stop it first.
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+Enter passphrase for key '/home/hduser/.ssh/id_rsa': 
+hduser@localhost's password: 
+localhost: nodemanager running as process 5555. Stop it first.
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ jps
+5555 NodeManager
+4563 NameNode
+14068 Jps
+5211 ResourceManager
+4748 DataNode
+4989 SecondaryNameNode
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ cd hadoop
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop$ ls
+bin  include  libexec      logs        README.txt  share
+etc  lib      LICENSE.txt  NOTICE.txt  sbin
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop$ cd bin/
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop/bin$ ls
+container-executor  hdfs      mapred.cmd               yarn
+hadoop              hdfs.cmd  rcc                      yarn.cmd
+hadoop.cmd          mapred    test-container-executor
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop/bin$ hdfs dfs -mkdir -p /user/hive/warehouse
+22/05/19 21:15:50 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop/bin$ hdfs dfs -mkdir -p /tmp/hive
+22/05/19 21:16:02 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop/bin$ hdfs dfs -chmod 777 /tmp
+22/05/19 21:16:19 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop/bin$ hdfs dfs -chmod 777 /user/hive/warehouse
+22/05/19 21:16:30 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop/bin$ hdfs dfs -chmod 777 /tmp/hive
+22/05/19 21:16:38 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop/bin$ cd ..
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hadoop$ cd ..
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local$ cd hive/
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hive$ ls
+bin                      examples  lib      README.txt
+binary-package-licenses  hcatalog  LICENSE  RELEASE_NOTES.txt
+conf                     jdbc      NOTICE   scripts
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hive$ cd bin/
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hive/bin$ ls
+beeline      ext       hive-config.cmd  hplsql        metatool
+beeline.cmd  hive      hive-config.sh   hplsql.cmd    schematool
+derby.log    hive.cmd  hiveserver2      metastore_db
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hive/bin$ ./schematool -initSchema -dbType derby
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/local/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/local/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+Metastore connection URL:	 jdbc:derby:;databaseName=metastore_db;create=true
+Metastore Connection Driver :	 org.apache.derby.jdbc.EmbeddedDriver
+Metastore connection User:	 APP
+Starting metastore schema initialization to 2.1.0
+Initialization script hive-schema-2.1.0.derby.sql
+Error: FUNCTION 'NUCLEUS_ASCII' already exists. (state=X0Y68,code=30000)
+org.apache.hadoop.hive.metastore.HiveMetaException: Schema initialization FAILED! Metastore state would be inconsistent !!
+Underlying cause: java.io.IOException : Schema script failed, errorcode 2
+Use --verbose for detailed stacktrace.
+*** schemaTool failed ***
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hive/bin$ ls
+beeline      ext       hive-config.cmd  hplsql        metatool
+beeline.cmd  hive      hive-config.sh   hplsql.cmd    schematool
+derby.log    hive.cmd  hiveserver2      metastore_db
+
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hive/bin$ ./hive
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/local/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/local/hadoop/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+Logging initialized using configuration in jar:file:/usr/local/hive/lib/hive-common-2.2.0.jar!/hive-log4j2.properties Async: true
+Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+
+hive> show databases;
+OK
+default
+Time taken: 0.612 seconds, Fetched: 1 row(s)
+
+hive> show tables;
+OK
+Time taken: 0.045 seconds
+
+hive> create database d1;
+OK
+Time taken: 0.112 seconds
+
+hive> create table emp(ename string,esal int);
+OK
+Time taken: 0.166 seconds
+
+hive> into table emp;                       //error dega
+NoViableAltException(153@[])
+	at org.apache.hadoop.hive.ql.parse.HiveParser.statement(HiveParser.java:1175)
+	at org.apache.hadoop.hive.ql.parse.ParseDriver.parse(ParseDriver.java:204)
+	at org.apache.hadoop.hive.ql.parse.ParseUtils.parse(ParseUtils.java:77)
+	at org.apache.hadoop.hive.ql.parse.ParseUtils.parse(ParseUtils.java:70)
+	at org.apache.hadoop.hive.ql.Driver.compile(Driver.java:453)
+	at org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1252)
+	at org.apache.hadoop.hive.ql.Driver.runInternal(Driver.java:1394)
+	at org.apache.hadoop.hive.ql.Driver.run(Driver.java:1181)
+	at org.apache.hadoop.hive.ql.Driver.run(Driver.java:1171)
+	at org.apache.hadoop.hive.cli.CliDriver.processLocalCmd(CliDriver.java:233)
+	at org.apache.hadoop.hive.cli.CliDriver.processCmd(CliDriver.java:184)
+	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:403)
+	at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:821)
+	at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:759)
+	at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:686)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+FAILED: ParseException line 1:0 cannot recognize input near 'into' 'table' 'emp'
+
+hive> select * from emp;
+OK
+Time taken: 0.706 seconds
+
+hive> drop table emp;
+OK
+Time taken: 0.721 seconds
+
+hive> ALTER DATABASE d1 SET DBPROPERTIES ('Date' = '2017-10-12');
+OK
+Time taken: 0.03 seconds
+
+hive> create table emp(ename string,esal int);
+OK
+Time taken: 0.043 seconds
+
+hive> ALTER TABLE emp RENAME TO emp1;
+OK
+Time taken: 0.085 seconds
+
+hive> ALTER TABLE emp1 CHANGE ename name String;
+OK
+Time taken: 0.059 seconds
+
+hive> insert into emp1 values ('dolly',7000);
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+Query ID = hduser_20220519212418_1435ed03-b8f5-45c2-9a62-d266174e024d
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks is set to 0 since there's no reduce operator
+Starting Job = job_1652961629864_0006, Tracking URL = http://ml19-HP-280-Pro-G6-Microtower-PC:8088/proxy/application_1652961629864_0006/
+Kill Command = /usr/local/hadoop/bin/hadoop job  -kill job_1652961629864_0006
+Hadoop job information for Stage-1: number of mappers: 1; number of reducers: 0
+2022-05-19 21:24:23,156 Stage-1 map = 0%,  reduce = 0%
+2022-05-19 21:24:26,266 Stage-1 map = 100%,  reduce = 0%, Cumulative CPU 1.61 sec
+MapReduce Total cumulative CPU time: 1 seconds 610 msec
+Ended Job = job_1652961629864_0006
+Stage-4 is selected by condition resolver.
+Stage-3 is filtered out by condition resolver.
+Stage-5 is filtered out by condition resolver.
+Moving data to directory hdfs://localhost:9000/user/hive/warehouse/emp1/.hive-staging_hive_2022-05-19_21-24-18_732_2302193277009213522-1/-ext-10000
+Loading data to table default.emp1
+MapReduce Jobs Launched: 
+Stage-Stage-1: Map: 1   Cumulative CPU: 1.61 sec   HDFS Read: 4103 HDFS Write: 79 SUCCESS
+Total MapReduce CPU Time Spent: 1 seconds 610 msec
+OK
+Time taken: 8.692 seconds
+
+hive> exit()
+    > hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hive/bin$ AAAAAAAAA
+hduser@ml19-HP-280-Pro-G6-Microtower-PC:/usr/local/hive/bin$ 
+
